@@ -1,9 +1,13 @@
 require('dotenv').config();
-const express = require("express");
+const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 
-const handle = require("./handlers");
+const db = require('./models');
+const handle = require('./handlers');
+
+
+
 
 const app = express();
 const port = process.env.PORT;
@@ -11,10 +15,10 @@ const port = process.env.PORT;
 app.use(cors());
 app.use(bodyParser.json());
 
-app.get("/", (req, res) => res.json({ hello: "world" }));
+app.get("/", (req, res) => res.json({ hello: 'world' }));
 
 app.use((req, res, next) => {
-  const err = new Error("Not found");
+  const err = new Error('Not found');
   err.status = 404;
 
   next(err);
