@@ -1,13 +1,26 @@
-module.exports.notFound = (req, res, next) => {
-    const err = new Error('Not found');
-    err.status = 404
+// Import the auth and poll modules
+const auth = require('./auth');
+const poll = require('./poll');
 
-    next(err);
+// Combine the auth and poll exports into a single object
+module.exports = {
+  ...auth,
+  ...poll,
 };
 
+// Define a custom error handler middleware
+module.exports.error = (err, req, res, next) => {
+  // Determine the status code
+  const statusCode = err.status || 500;
 
-module.exports.errors = (err, req, res, next) => {
-  res.status(err.status || 500).json({
-    err: err.message || "Something went wrong",
-  });
+  // Prepare the error response
+  const response = {
+    success: false,
+    error: {
+      message: err.message || 'Something went wrong.',
+    },
+  };
+
+  // Send the error response
+  return res.status(statusCode).json(response);
 };
