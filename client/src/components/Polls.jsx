@@ -8,25 +8,21 @@ class Polls extends Component {
     super(props);
     this.handleSelect = this.handleSelect.bind(this);
   }
-
   componentDidMount() {
-    const { isAuthenticated } = this.props.auth;
-    if (isAuthenticated) {
-      const { getPolls, getUserPolls } = this.props;
-      getPolls();
-    }
+    const { getPolls } = this.props;
+    getPolls();
   }
 
   handleSelect(id) {
     const { history } = this.props;
     history.push(`/poll/${id}`);
   }
+  
 
   render() {
-    const { auth } = this.props;
-    const polls = this.props.polls || []; // Check if polls array exists
+    const { getPolls, getUserPolls, auth } = this.props;
 
-    const pollsList = polls.map((poll) => (
+    const polls = this.props.polls.map(poll => (
       <li onClick={() => this.handleSelect(poll._id)} key={poll._id}>
         {poll.question}
       </li>
@@ -37,21 +33,21 @@ class Polls extends Component {
         {auth.isAuthenticated && (
           <div className="buttons_center">
             <button className="button" onClick={getPolls}>
-              All polls
+              All Ballots
             </button>
             <button className="button" onClick={getUserPolls}>
-              My polls
+              My Ballots
             </button>
           </div>
         )}
-        <ul className="polls">{pollsList}</ul>
+        <ul className="polls">{polls}</ul>
       </Fragment>
     );
   }
 }
 
 export default connect(
-  (store) => ({
+  store => ({
     auth: store.auth,
     polls: store.polls,
   }),

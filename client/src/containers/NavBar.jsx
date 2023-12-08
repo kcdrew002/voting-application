@@ -10,7 +10,7 @@ const Navbar = ({ auth, logout }) => (
       <ul className="navbar-container">
         <li>
           <Link className="navbar-brand" to="/">
-            Poll app
+            Home
           </Link>
         </li>
         {!auth.isAuthenticated && (
@@ -31,7 +31,7 @@ const Navbar = ({ auth, logout }) => (
           <Fragment>
             <li>
               <Link className="navbar-item" to="/poll/new">
-                New Poll
+                Create New Ballot
               </Link>
             </li>
             <li>

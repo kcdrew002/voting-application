@@ -1,11 +1,11 @@
 .navbar {
-    background-color: var(--blue);
+    background-color: var(--maroon);
     padding: 1rem 0;
   }
   
   .navbar-brand {
     background-color: var(--light);
-    color: var(--blue);
+    color: var(--maroon);
     text-decoration: none;
     padding: 0.5rem;
     border-radius: 0.5rem;
